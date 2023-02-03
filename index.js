@@ -17,37 +17,45 @@ function App() {
 
     const getNewQuote = () => {
         let randIndex = Math.floor(Math.random() * quotes.length);
-            setRandomQuote(quotes[randIndex])
+        setRandomQuote(quotes[randIndex])
     }
 
 
     return (
-        <div className="container pt-5">
-            <div className="jumbotron">
+        <wrapper id="quote-box" className="container pt-5">
+            <div id="text" className="jumbotron">
                 <div className="card">
                     <div className="card-header">Inspirational Quotes</div>
                     <div className="card-body">
                         {randomQuote ? (
                             <>
-                            <h5 className="card-title">- {randomQuote.author || "No Author"}</h5>
-                            <p className="card-text">&quot;{randomQuote.text}&quot;</p>
+                                <h5 id="author" className="card-title">- {randomQuote.author || "No Author"}</h5>
+                                <p className="card-text">&quot;{randomQuote.text}&quot;</p>
                             </>
                         ) : (
                             <h2>Loading</h2>
                         )}
 
                         <div className="row">
-                            <button onClick={getNewQuote} className="btn btn-primary ml-3" >New Quote</button>
-                                <a href=""></a>
-                                <a href=""></a>
-                        </div>
+                            <button id="new-quote" onClick={getNewQuote} className="btn btn-primary ml-3" >New Quote</button>
+                            <a id="tweet-quote" href={
+                                "https://twitter.com/intent/tweet?hashtags=QuotesOfTheDay&related=freecodecamp&text=" +
+                            encodeURIComponent (
+                            '"' + randomQuote.text + '" ' + '-' + randomQuote.author
+                            )
+                                } 
+                                target="_blank" className="btn btn-warning">
+                            <i className="fa-brands fa-twitter"></i>
+                        </a>
+                        <a href="" className="btn btn-danger"></a>
                     </div>
                 </div>
             </div>
-            
-        </div>    
-            );
+        </div>
+
+        </wrapper >
+    );
 }
 
 
-            ReactDOM.render(<App />, document.getElementById('app'))
+ReactDOM.render(<App />, document.getElementById('app'))
