@@ -14,6 +14,13 @@ function App() {
         }
         fetchData();
     }, [])
+
+    const getNewQuote = () => {
+        let randIndex = Math.floor(Math.random() * quotes.length);
+            setRandomQuote(quotes[randIndex])
+    }
+
+
     return (
         <div className="container pt-5">
             <div className="jumbotron">
@@ -28,6 +35,12 @@ function App() {
                         ) : (
                             <h2>Loading</h2>
                         )}
+
+                        <div className="row">
+                            <button onClick={getNewQuote} className="btn btn-primary ml-3" >New Quote</button>
+                                <a href=""></a>
+                                <a href=""></a>
+                        </div>
                     </div>
                 </div>
             </div>
