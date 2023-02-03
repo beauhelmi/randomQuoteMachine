@@ -1,7 +1,7 @@
 function App() {
 
     const [quotes, setQuotes] = React.useState([]);
-    const [randomQuotes, setRandomQuotes] = React.useState([]);
+    const [randomQuote, setRandomQuote] = React.useState([]);
 
     React.useEffect(() => {
         async function fetchData() {
@@ -9,19 +9,30 @@ function App() {
             const data = await response.json();
 
             setQuotes(data);
-            let randomQuotes = Math.floor(Math.random() * data.length);
-            setRandomQuotes(data[randIndex])
+            let randIndex = Math.floor(Math.random() * data.length);
+            setRandomQuote(data[randIndex])
         }
         fetchData();
     }, [])
     return (
-        <div>Hello World
-            {quotes.map(quote => (
-                <div>{quote.text}</div>
-           ))}
-
-
+        <div className="container pt-5">
+            <div className="jumbotron">
+                <div className="card">
+                    <div className="card-header">Inspirational Quotes</div>
+                    <div className="card-body">
+                        {randomQuote ? (
+                            <>
+                            <h5 className="card-title">- {randomQuote.author || "No Author"}</h5>
+                            <p className="card-text">&quot;{randomQuote.text}&quot;</p>
+                            </>
+                        ) : (
+                            <h2>Loading</h2>
+                        )}
+                    </div>
+                </div>
             </div>
+            
+        </div>    
             );
 }
 
